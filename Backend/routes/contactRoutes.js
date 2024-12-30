@@ -35,6 +35,16 @@ router.get('/contact',async(req,res)=>{
     }
 });
 
+router.get('/contact/:id',async(req,res)=>{
+    try{
+        const Contacts=await schema.findById(req.params.id);
+        res.json(Contacts);
+    }
+    catch(error){
+        res.status(404).json({message:error.message});
+    }
+});
+
 router.put('/contact/:id',async(req,res)=>{
     try{
         const updatedContact=await schema.findByIdAndUpdate(req.params.id,req.body,{new:true});
