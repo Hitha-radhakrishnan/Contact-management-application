@@ -1,32 +1,32 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import '../App.css'
+import { deleteContact, fetchContacts } from '../api';
 
 const Dashboard = () => {
     const[contacts,setContacts]=useState([]);
     const navigate=useNavigate();
 
+    const loadContacts = async () => {
+        const data = await fetchContacts();
+        setContacts(data);
+      };
+
     useEffect(()=>{
-        const fetchContacts=async()=>{
-            const data=await fetchContacts();
-            setContacts(data);
-        };
+        loadContacts();
     },[]);
 
-    // const handledelete=async(id)=>{
-    //     await deleteContact(id);
-    //     setContacts(contacts.filter((contact)=>contact._id!==id));
-    // };
+    const handledelete=async(id)=>{
+        await deleteContact(id);
+        loadContacts();
+    };
 
   return (
     <div className='dashboard'>
-        <h1>WELCOME!</h1>
         {contacts.length===0 ? (
             <div className='no-contacts'>
             <p>No contacts available. Create one now!</p>
-            <button className='create-btn' onClick={()=>navigate('/create')}>
-            CREATE
-            </button>
+            
             </div>
         ):(
             contacts.map((contact)=>(
@@ -36,7 +36,7 @@ const Dashboard = () => {
                 <p>Phone:{contact.Phone}</p>
                 <p>Address:{contact.Address}</p>
                 <button onClick={()=>navigate(`/edit/${contact._id}`)}>Edit</button>
-                {/* <button onClick={()=>handledelete(contact._id)}>Delete</button> */}
+                <button onClick={()=>handledelete(contact._id)}>Delete</button>
                 </div>
             ))
         )}

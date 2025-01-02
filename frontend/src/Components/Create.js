@@ -1,35 +1,40 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { createContact } from '../api';
 import '../App.css'
 
 const Create = () => {
-    const[name,setName]=useState('');
-    const[email,setEmail]=useState('');
-    const[phone,setPhone]=useState('');
-    const[address,setAddress]=useState('');
+  const [contact, setContact] = useState({ Name: '', Email: '', Phone: '', Address: '' });
     const navigate=useNavigate();
+
     const handleSubmit=async(e)=>{
         e.preventDefault();
-        await Create({Name:name,Email:email,Phone:phone,Address:address});
+        try{
+          const response = await createContact(contact);
+        console.log('Contact created successfully:',response.data);
         navigate('/');
-    }
+        }
+        catch(error){
+          console.error('Error creating contact:', error.response?.data || error.message);
+        }
+    };
   return (
     <form onSubmit={handleSubmit}>
         <h2>Create Contact</h2>
 
-        <input type="text" placeholder='Name' value={name} 
-        onChange={(e)=>setName(e.target.value)} required/>
+        <input type="text" placeholder='Name' value={contact.Name} 
+        onChange={(e)=>setContact({...contact,Name:e.target.value})} required/>
 
-        <input type="email" placeholder='Email' value={email} 
-        onChange={(e)=>setEmail(e.target.value)} required/>
+        <input type="email" placeholder='Email' value={contact.Email} 
+        onChange={(e)=>setContact({...contact,Email:e.target.value})} required/>
 
-        <input type="text" placeholder='Phone' value={phone} 
-        onChange={(e)=>setPhone(e.target.value)} required/>
+        <input type="text" placeholder='Phone' value={contact.Phone} 
+        onChange={(e)=>setContact({...contact,Phone:e.target.value})} required/>
 
-        <textarea placeholder='Address' value={address} 
-        onChange={(e)=>setAddress(e.target.value)} required/>
+        <textarea placeholder='Address' value={contact.Address} 
+        onChange={(e)=>setContact({...contact,Address:e.target.value})} required/>
 
-        <button type='submit'>Create</button>
+        <button type='submit'>Submit</button>
     </form>
 
   )

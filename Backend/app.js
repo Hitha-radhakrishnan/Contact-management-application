@@ -1,8 +1,11 @@
 const express=require('express');
 const app=express();
 const mongoose=require('mongoose');
+const cors=require('cors');
 require('dotenv').config();
 
+app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(express.json());
 
 mongoose.connect(process.env.DB_URI)
     .then(() =>
@@ -11,10 +14,10 @@ mongoose.connect(process.env.DB_URI)
       console.error('Database connection failed',error));
 
     const contactRouter=require('./routes/contactRoutes');
-    app.use('/api',contactRouter);
+    app.use('/api/',contactRouter);
 
 
-const PORT=process.env.PORT;
+const PORT=process.env.PORT || 7000;
 
 app.listen(PORT,()=>{
     console.log(`Server is running on http://localhost:${PORT}`);

@@ -4,6 +4,8 @@ import './App.css'
 import Header from './Components/Header';
 import Dashboard from './Components/Dashboard';
 import Create from './Components/Create';
+import EditContact from './Components/EditContact';
+import Landing from './Components/Landing';
 
 
 
@@ -12,8 +14,10 @@ function App() {
     <Router>
       <Header/>
       <Routes>
-        <Route path="/" element={<Dashboard/>}/>
-        <Route path="/" element={<Create/>}/>
+        <Route path="/" element={<Landing/>}/>
+        <Route path="/dashboard" element={<Dashboard/>}/>
+        <Route path="/create" element={<Create/>}/>
+        <Route path="/edit/:id" element={<EditContact/>}/>
       </Routes>
     </Router>
   )
