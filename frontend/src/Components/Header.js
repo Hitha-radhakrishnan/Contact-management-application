@@ -17,8 +17,6 @@ const Header = () => {
           <h1>CONTAX</h1>
           <button className="home-button" onClick={handleHomeClick}>HOME</button>
           <Link to="/dashboard">ALL CONTACTS</Link>
-          <Link to="/login">LOGIN</Link>
-          <Link to="/register">REGISTER</Link>
         </nav>
       </header>
     </div>

@@ -10,11 +10,6 @@ export const fetchContacts = async () => {
   return response.data;
 };
 
-// export const fetchContact = async (id) => {
-//   const response = await API.get(`/contact/${id}`);
-//   return response.data;
-// };
-
 export const createContact = async (contactData) => {
   try {
       const response = await API.post('/contact', contactData);

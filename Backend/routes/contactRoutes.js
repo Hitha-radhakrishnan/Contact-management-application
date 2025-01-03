@@ -11,13 +11,13 @@ router.use(bodyParser.urlencoded({
 
 router.post('/contact', async (req, res) => {
     try {
-        const contact = new Contact(req.body); // Create a new contact
-        const newContact = await contact.save(); // Save to MongoDB
-        console.log('New contact saved:', newContact); // Log for debugging
-        res.status(201).json(newContact); // Send back the saved contact
+        const contact = new Contact(req.body); 
+        const newContact = await contact.save(); 
+        console.log('New contact saved:', newContact); 
+        res.status(201).json(newContact); 
     } catch (error) {
-        console.error('Error saving contact:', error); // Log any errors
-        res.status(400).json({ message: error.message }); // Send error response
+        console.error('Error saving contact:', error); 
+        res.status(400).json({ message: error.message }); 
     }
 });
 

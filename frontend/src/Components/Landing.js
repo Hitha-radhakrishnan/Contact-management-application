@@ -1,7 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import image1 from '../assets/img1.jpg'
-import image2 from '../assets/img2.jpg'
+
 
 const Landing = () => {
     const navigate=useNavigate();
@@ -14,10 +13,6 @@ const Landing = () => {
             CREATE
             </button>
             </div>
-        {/* <div className="images">
-                <img src={image1} alt="Image 1" className="image" />
-                <img src={image2} alt="Image 2" className="image" />
-            </div> */}
         </div>
   );
 };

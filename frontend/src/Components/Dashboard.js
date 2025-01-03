@@ -22,15 +22,16 @@ const Dashboard = () => {
     };
 
   return (
+    
     <div className='dashboard'>
         {contacts.length===0 ? (
             <div className='no-contacts'>
             <p>No contacts available. Create one now!</p>
-            
             </div>
         ):(
+            
             contacts.map((contact)=>(
-                <div key={contact._id} className='contact'>
+                <div key={contact._id} className='contact'>  
                 <h2>{contact.Name}</h2>
                 <p>Email:{contact.Email}</p>
                 <p>Phone:{contact.Phone}</p>
