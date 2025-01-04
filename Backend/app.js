@@ -7,10 +7,11 @@ require('dotenv').config();
 app.use(cors());
 app.use(express.json());
 const corsOptions = {
-  origin: "http://localhost:3004",
+  origin: [
+    "http://localhost:3004",
+    "https://contact-manager99.netlify.app/"
+  ],
 };
-app.use(cors(corsOptions));
-
 mongoose.connect(process.env.DB_URI)
     .then(() =>
       console.log('Successfully connected to the database'))
