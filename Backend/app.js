@@ -4,7 +4,12 @@ const mongoose=require('mongoose');
 const cors=require('cors');
 require('dotenv').config();
 
-app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(cors({ 
+  origin: ['http://localhost:3000','http://localhost:3001'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
+
+ }));
 app.use(express.json());
 
 mongoose.connect(process.env.DB_URI)
@@ -14,7 +19,7 @@ mongoose.connect(process.env.DB_URI)
       console.error('Database connection failed',error));
 
     const contactRouter=require('./routes/contactRoutes');
-    app.use('/api/',contactRouter);
+    app.use('/api',contactRouter);
 
 
 const PORT=process.env.PORT || 7000;

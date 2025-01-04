@@ -5,6 +5,7 @@ import { deleteContact, fetchContacts } from '../api';
 
 const Dashboard = () => {
     const[contacts,setContacts]=useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
     const navigate=useNavigate();
 
     const loadContacts = async () => {
@@ -16,33 +17,47 @@ const Dashboard = () => {
         loadContacts();
     },[]);
 
-    const handledelete=async(id)=>{
+    const handleDelete=async(id)=>{
         await deleteContact(id);
         loadContacts();
     };
+    const filteredContacts = contacts.filter((contact) =>
+    contact.Name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
-  return (
+    return (
+        <div className="dashboard">
+          {/* Search bar */}
+          <div className="search-bar">
+            <input
+              type="text"
+              placeholder="Search by name..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
     
-    <div className='dashboard'>
-        {contacts.length===0 ? (
-            <div className='no-contacts'>
-            <p>No contacts available. Create one now!</p>
+          {filteredContacts.length === 0 ? (
+            <div className="no-contacts">
+              <center><h2>No contacts available. <br/>Create one now!</h2></center>
             </div>
-        ):(
-            
-            contacts.map((contact)=>(
-                <div key={contact._id} className='contact'>  
+          ) : (
+            filteredContacts.map((contact) => (
+              <div key={contact._id} className="contact">
                 <h2>{contact.Name}</h2>
-                <p>Email:{contact.Email}</p>
-                <p>Phone:{contact.Phone}</p>
-                <p>Address:{contact.Address}</p>
-                <button onClick={()=>navigate(`/edit/${contact._id}`)}>Edit</button>
-                <button onClick={()=>handledelete(contact._id)}>Delete</button>
-                </div>
+                <p>Email: {contact.Email}</p>
+                <p>Phone: {contact.Phone}</p>
+                <p>Address: {contact.Address}</p>
+                <button onClick={() => navigate(`/edit/${contact._id}`)}>Edit</button>
+                <button onClick={() => handleDelete(contact._id)}>Delete</button>
+              </div>
             ))
-        )}
-    </div>
-  )
-}
-
-export default Dashboard
+          )}
+        </div>
+      );
+    };
+    
+    export default Dashboard;
+    
+    
+    

@@ -9,7 +9,6 @@ export const fetchContacts = async () => {
   const response = await API.get('/contact');
   return response.data;
 };
-
 export const createContact = async (contactData) => {
   try {
       const response = await API.post('/contact', contactData);
@@ -20,6 +19,7 @@ export const createContact = async (contactData) => {
       throw error;
   }
 };
+
 
 export const updateContact = async (id, contactData) => {
   return await API.put(`/contact/${id}`, contactData);
