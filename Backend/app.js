@@ -4,13 +4,12 @@ const mongoose=require('mongoose');
 const cors=require('cors');
 require('dotenv').config();
 
-app.use(cors({ 
-  origin: ['http://localhost:3000','http://localhost:3001'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true,
-
- }));
+app.use(cors());
 app.use(express.json());
+const corsOptions = {
+  origin: "http://localhost:3004",
+};
+app.use(cors(corsOptions));
 
 mongoose.connect(process.env.DB_URI)
     .then(() =>
