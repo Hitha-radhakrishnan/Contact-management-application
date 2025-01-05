@@ -35,3 +35,42 @@ Make sure you have the following installed:
 - Node.js
 - npm
 - MongoDB
+
+---
+
+### Backend Setup
+
+
+- Navigate to the backend folder
+cd backend
+
+- Install dependencies
+npm install
+
+- Create a .env file and configure it
+ "MONGO_URI=<Your MongoDB Connection String>" >> .env
+ "PORT=5000" >> .env
+
+- Start the backend server node app.js
+
+---
+
+### Frontend Setup
+
+* Navigate to the frontend folder
+cd ../frontend
+
+* Install dependencies
+npm install
+
+* Start the React app
+npm start
+
+---
+
+## Deployement
+
+* Backend Deployment
+-Deploy to Render or Heroku.
+* Frontend Deployment
+-Deploy to Netlify or Vercel.
