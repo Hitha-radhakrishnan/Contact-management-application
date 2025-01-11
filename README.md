@@ -1,3 +1,7 @@
+**Name: Hitha R**
+
+**MERN 3**
+
 # Contact Management Application
 
 Welcome to the **Contact Management Application**!  
